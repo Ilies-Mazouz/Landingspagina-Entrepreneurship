@@ -499,6 +499,52 @@ p {
   align-items: center;
 }
 
+/* Unique value / comparison rows */
+.compare-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.compare-left,
+.compare-right {
+  padding: 1rem;
+  border-radius: 12px;
+  min-height: 72px;
+}
+
+.compare-left.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.compare-left .muted {
+  color: #bfc7cf;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.compare-right.card {
+  background: linear-gradient(160deg, rgba(244,99,30,0.06), rgba(244,99,30,0.02));
+  border: 1px solid rgba(244,99,30,0.12);
+  color: var(--text);
+  box-shadow: 0 10px 24px rgba(244,99,30,0.06);
+  font-weight: 700;
+}
+
+@media (max-width: 920px) {
+  .compare-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .vision-list {
   list-style: none;
   margin: 0;

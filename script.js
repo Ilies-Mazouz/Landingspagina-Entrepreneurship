@@ -81,22 +81,41 @@ if ('IntersectionObserver' in window) {
 
   sections.forEach((section) => revealObserver.observe(section));
 
+  // Active section observer (robust): use single threshold + explicit enter/leave handling
   const activeSectionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
+        const id = entry.target.id;
+        const link = navLinksById.get(id);
 
-        const matchingLink = navLinksById.get(entry.target.id);
-        if (matchingLink) {
-          setActiveNavLink(entry.target.id);
+        if (entry.intersectionRatio >= 0.3 && entry.isIntersecting) {
+          // When a section meets the visibility threshold, activate its nav link
+          navLinks.forEach((l) => l.classList.toggle('active', l === link));
+        } else if (!entry.isIntersecting) {
+          // If a section leaves the viewport remove its active state if present
+          if (link && link.classList.contains('active')) {
+            link.classList.remove('active');
+          }
         }
       });
+      // If no link is active (e.g., leaving a section), try to pick the most visible section
+      const anyActive = Array.from(navLinks).some((l) => l.classList.contains('active'));
+      if (!anyActive) {
+        // compute intersection ratios for all observed sections and pick the largest
+        let best = { id: null, ratio: 0 };
+        sections.forEach((s) => {
+          const rect = s.getBoundingClientRect();
+          const visibleHeight = Math.max(0, Math.min(window.innerHeight, rect.bottom) - Math.max(0, rect.top));
+          if (visibleHeight > best.ratio) {
+            best = { id: s.id, ratio: visibleHeight };
+          }
+        });
+        if (best.id) setActiveNavLink(best.id);
+      }
     },
     {
-      threshold: 0.38,
-      rootMargin: '-30% 0px -55% 0px'
+      threshold: 0.3,
+      rootMargin: '-20% 0px -60% 0px'
     }
   );
 
