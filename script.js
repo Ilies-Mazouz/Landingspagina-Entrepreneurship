@@ -21,6 +21,19 @@ const setActiveNavLink = (sectionId) => {
   });
 };
 
+const updateActiveNavLink = () => {
+  const activationPoint = window.scrollY + window.innerHeight * 0.35;
+  let activeSectionId = sections[0]?.id || 'hero';
+
+  sections.forEach((section) => {
+    if (activationPoint >= section.offsetTop) {
+      activeSectionId = section.id;
+    }
+  });
+
+  setActiveNavLink(activeSectionId);
+};
+
 const toggleNavBlur = () => {
   if (window.scrollY > 18) {
     navbar.classList.add('scrolled');
@@ -34,7 +47,9 @@ const toggleNavBlur = () => {
 };
 
 window.addEventListener('scroll', toggleNavBlur, { passive: true });
+window.addEventListener('scroll', updateActiveNavLink, { passive: true });
 window.addEventListener('load', toggleNavBlur);
+window.addEventListener('load', updateActiveNavLink);
 
 if (navToggle && navMenu) {
   navToggle.addEventListener('click', () => {
@@ -81,47 +96,8 @@ if ('IntersectionObserver' in window) {
 
   sections.forEach((section) => revealObserver.observe(section));
 
-  // Active section observer (robust): use single threshold + explicit enter/leave handling
-  const activeSectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const id = entry.target.id;
-        const link = navLinksById.get(id);
-
-        if (entry.intersectionRatio >= 0.3 && entry.isIntersecting) {
-          // When a section meets the visibility threshold, activate its nav link
-          navLinks.forEach((l) => l.classList.toggle('active', l === link));
-        } else if (!entry.isIntersecting) {
-          // If a section leaves the viewport remove its active state if present
-          if (link && link.classList.contains('active')) {
-            link.classList.remove('active');
-          }
-        }
-      });
-      // If no link is active (e.g., leaving a section), try to pick the most visible section
-      const anyActive = Array.from(navLinks).some((l) => l.classList.contains('active'));
-      if (!anyActive) {
-        // compute intersection ratios for all observed sections and pick the largest
-        let best = { id: null, ratio: 0 };
-        sections.forEach((s) => {
-          const rect = s.getBoundingClientRect();
-          const visibleHeight = Math.max(0, Math.min(window.innerHeight, rect.bottom) - Math.max(0, rect.top));
-          if (visibleHeight > best.ratio) {
-            best = { id: s.id, ratio: visibleHeight };
-          }
-        });
-        if (best.id) setActiveNavLink(best.id);
-      }
-    },
-    {
-      threshold: 0.3,
-      rootMargin: '-20% 0px -60% 0px'
-    }
-  );
-
-  sections.forEach((section) => activeSectionObserver.observe(section));
 } else {
   sections.forEach((section) => section.classList.add('in-view'));
 }
 
-setActiveNavLink('hero');
+updateActiveNavLink();
