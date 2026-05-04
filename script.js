@@ -3,7 +3,6 @@ const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-menu a');
 const sections = document.querySelectorAll('main .section');
-const backToTopButton = document.querySelector('.back-to-top');
 
 const navLinksById = new Map(
   Array.from(navLinks)
@@ -40,10 +39,6 @@ const toggleNavBlur = () => {
   } else {
     navbar.classList.remove('scrolled');
   }
-
-  if (backToTopButton) {
-    backToTopButton.classList.toggle('visible', window.scrollY > 400);
-  }
 };
 
 window.addEventListener('scroll', toggleNavBlur, { passive: true });
@@ -67,12 +62,6 @@ navLinks.forEach((link) => {
     }
   });
 });
-
-if (backToTopButton) {
-  backToTopButton.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
 
 if ('IntersectionObserver' in window) {
   document.body.classList.add('reveal-ready');
