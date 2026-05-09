@@ -499,48 +499,104 @@ p {
   align-items: center;
 }
 
-/* Unique value / comparison rows */
+/* Unique value / comparison cards */
 .compare-grid {
   display: grid;
   gap: 1rem;
   margin-top: 1rem;
 }
 
-.compare-row {
+.compare-card {
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 2px);
+  background: linear-gradient(160deg, rgba(15, 34, 59, 0.96), rgba(9, 20, 36, 0.94));
+  padding: 1rem;
+  box-shadow: 0 14px 30px rgba(2, 8, 16, 0.28);
+}
+
+.compare-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.compare-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.38rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.compare-chip-alt {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+}
+
+.compare-chip-brand {
+  background: rgba(244, 99, 30, 0.12);
+  border: 1px solid rgba(244, 99, 30, 0.28);
+  color: var(--text);
+}
+
+.compare-vs {
+  color: var(--accent);
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+}
+
+.compare-card-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.8rem;
+  gap: 0.9rem;
 }
 
-.compare-left,
-.compare-right {
+.compare-side {
   padding: 1rem;
   border-radius: 12px;
-  min-height: 72px;
+  min-height: 150px;
 }
 
-.compare-left.card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  color: var(--muted);
-  border: 1px solid rgba(255,255,255,0.03);
+.compare-side h3 {
+  margin-bottom: 0.55rem;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
 }
 
-.compare-left .muted {
-  color: #bfc7cf;
-  font-size: 0.95rem;
-  font-weight: 600;
+.compare-side p {
+  margin-bottom: 0;
 }
 
-.compare-right.card {
-  background: linear-gradient(160deg, rgba(244,99,30,0.06), rgba(244,99,30,0.02));
-  border: 1px solid rgba(244,99,30,0.12);
-  color: var(--text);
-  box-shadow: 0 10px 24px rgba(244,99,30,0.06);
+.compare-price {
+  color: var(--accent);
   font-weight: 700;
+  margin-bottom: 0.65rem;
+  font-size: 1.05rem;
+}
+
+.compare-side-alt {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+}
+
+.compare-side-brand {
+  background: linear-gradient(160deg, rgba(244, 99, 30, 0.09), rgba(244, 99, 30, 0.03));
+  border: 1px solid rgba(244, 99, 30, 0.18);
+  color: var(--text);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 @media (max-width: 920px) {
-  .compare-row {
+  .compare-card-body {
     grid-template-columns: 1fr;
   }
 }
