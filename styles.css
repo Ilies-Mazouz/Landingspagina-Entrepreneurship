@@ -198,7 +198,7 @@ p {
   align-items: center;
   padding-top: calc(var(--nav-height) + 2rem);
   /* Background image behind hero content - local file */
-  background: linear-gradient(rgba(10, 22, 40, 0.82), rgba(10, 22, 40, 0.82)), url('/images/basketball-training-U18.jpg');
+  background: linear-gradient(rgba(10, 22, 40, 0.82), rgba(10, 22, 40, 0.82)), url('images/basketball-training-U18.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
