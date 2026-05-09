@@ -15,6 +15,12 @@
   box-sizing: border-box;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -191,6 +197,12 @@ p {
   display: grid;
   align-items: center;
   padding-top: calc(var(--nav-height) + 2rem);
+  /* Background image behind hero content - local file */
+  background: linear-gradient(rgba(10, 22, 40, 0.82), rgba(10, 22, 40, 0.82)), url('/images/basketball-training-U18.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 .hero-layout {
@@ -497,6 +509,29 @@ p {
   padding: 1.2rem;
   display: grid;
   align-items: center;
+}
+
+.vision-img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1.2rem;
+  object-fit: cover;
+  max-height: 220px;
+  border: 1px solid rgba(244,99,30,0.2);
+  display: block;
+}
+
+.services-banner {
+  width: 100%;
+  overflow: hidden;
+}
+
+.services-banner img {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+  height: 220px;
 }
 
 /* Unique value / comparison cards */
