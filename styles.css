@@ -923,35 +923,7 @@ textarea:focus {
   color: var(--accent);
 }
 
-.social-links {
-  display: flex;
-  gap: 0.55rem;
-}
-
-.social-link {
-  width: 38px;
-  height: 38px;
-  border: 1px solid rgba(244, 239, 230, 0.25);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: var(--muted);
-  background: rgba(10, 22, 40, 0.65);
-  transition: color 180ms ease, border-color 180ms ease, transform 180ms ease;
-}
-
-.social-link:hover,
-.social-link:focus-visible {
-  color: var(--accent);
-  border-color: rgba(244, 99, 30, 0.6);
-  transform: translateY(-1px);
-}
-
-.social-link svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
+.--removed-social-links-css-placeholder {}
 
 .footer-bottom {
   border-top: 1px solid var(--border);
